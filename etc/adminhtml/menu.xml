@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="LeanCommerce_LocationGrid::manager" title="LeanCommerce" module="LeanCommerce_LocationGrid" sortOrder="10" resource="LeanCommerce_LocationGrid::manager"/>
+        <add id="LeanCommerce_LocationGrid::add_row" title="Locations" module="LeanCommerce_LocationGrid" sortOrder="20" parent="LeanCommerce_LocationGrid::manager" action="grid/grid" resource="LeanCommerce_LocationGrid::add_row"/>
+    </menu>
+</config>
