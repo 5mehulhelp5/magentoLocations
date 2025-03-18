@@ -116,27 +116,43 @@
                 </item>
             </argument>
         </selectionsColumn>
-        <column name="name">
+        <column name="branchName">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
                     <item name="filter" xsi:type="string">text</item>
-                    <item name="label" xsi:type="string" translate="true">name</item>
+                    <item name="label" xsi:type="string" translate="true">Sucursal</item>
                 </item>
             </argument>
         </column>
-        <column name="description">
+        <column name="address">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
                     <item name="filter" xsi:type="string">false</item>
-                    <item name="label" xsi:type="string" translate="true">description</item>
+                    <item name="label" xsi:type="string" translate="true">Dirección</item>
                 </item>
             </argument>
         </column>
-        <column name="link">
+        <column name="phone">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
                     <item name="filter" xsi:type="string">false</item>
-                    <item name="label" xsi:type="string" translate="true">link</item>
+                    <item name="label" xsi:type="string" translate="true">Telefono</item>
+                </item>
+            </argument>
+        </column>
+        <column name="latitude">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="filter" xsi:type="string">false</item>
+                    <item name="label" xsi:type="string" translate="true">Latitud</item>
+                </item>
+            </argument>
+        </column>
+        <column name="longitude">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="filter" xsi:type="string">false</item>
+                    <item name="label" xsi:type="string" translate="true">Longitud</item>
                 </item>
             </argument>
         </column>

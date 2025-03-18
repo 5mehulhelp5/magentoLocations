@@ -48,57 +48,93 @@ class Grid extends \Magento\Framework\Model\AbstractModel implements GridInterfa
         return $this->setData(self::ENTITY_ID, $entityId);
     }
     /**
-     * Get Name.
+     * Get BranchName.
      *
      * @return varchar
      */
-    public function getName()
+    public function getBranchName()
     {
         return $this->getData(self::NAME);
     }
 
     /**
-     * Set Name.
+     * Set BranchName.
      */
-    public function setName($name)
+    public function setBranchName($branchName)
     {
-        return $this->setData(self::NAME, $name);
+        return $this->setData(self::BRANCHNAME, $branchName);
     }
 
     /**
-     * Get Description.
+     * Get Address.
      *
      * @return varchar
      */
-    public function getDescription()
+    public function getAddress()
     {
-        return $this->getData(self::DESCRIPTION);
+        return $this->getData(self::ADDRESS);
     }
 
     /**
-     * Set Description.
+     * Set Address.
      */
-    public function setDescription($description)
+    public function setAddress($address)
     {
-        return $this->setData(self::DESCRIPTION, $description);
+        return $this->setData(self::ADDRESS, $address);
     }
 
     /**
-     * Get Link.
+     * Get Phone.
      *
      * @return varchar
      */
-    public function getLink()
+    public function getPhone()
     {
-        return $this->getData(self::LINK);
+        return $this->getData(self::Phone);
     }
 
     /**
-     * Set Link.
+     * Set Phone.
      */
-    public function setLink($link)
+    public function setPhone($phone)
     {
-        return $this->setData(self::LINK, $link);
+        return $this->setData(self::PHONE, $phone);
+    }
+
+    /**
+     * Get Latitude.
+     *
+     * @return varchar
+     */
+    public function getLatitude()
+    {
+        return $this->getData(self::LATITUDE);
+    }
+
+    /**
+     * Set Latitude.
+     */
+    public function setLatitude($latitude)
+    {
+        return $this->setData(self::LATITUDE, $latitude);
+    }
+
+    /**
+     * Get Longitude.
+     *
+     * @return varchar
+     */
+    public function getLongitude()
+    {
+        return $this->getData(self::LONGITUDE);
+    }
+
+    /**
+     * Set Longitude.
+     */
+    public function setLongitude($longitude)
+    {
+        return $this->setData(self::LONGITUDE, $longitude);
     }
 
     /**

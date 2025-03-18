@@ -65,39 +65,65 @@ class Form extends \Magento\Backend\Block\Widget\Form\Generic
         }
 
         $fieldset->addField(
-            'name',
+            'branchName',
             'text',
             [
-                'name' => 'name',
-                'label' => __('Nombre'),
-                'id' => 'name',
-                'title' => __('Nombre'),
+                'name' => 'branchName',
+                'label' => __('Sucursal'),
+                'id' => 'branchName',
+                'title' => __('Sucursal'),
                 'class' => 'required-entry',
                 'required' => true,
             ]
         );
 
         $fieldset->addField(
-            'description',
+            'address',
             'text',
             [
-                'name' => 'description',
-                'label' => __('Descripción'),
-                'id' => 'description',
-                'title' => __('Descripción'),
+                'name' => 'address',
+                'label' => __('Dirección'),
+                'id' => 'address',
+                'title' => __('Dirección'),
                 'class' => 'required-entry',
                 'required' => true,
             ]
         );
 
         $fieldset->addField(
-            'link',
+            'phone',
             'text',
             [
-                'name' => 'link',
-                'label' => __('URL ubicación'),
-                'id' => 'link',
-                'title' => __('URL ubicación'),
+                'name' => 'phone',
+                'label' => __('Telefono'),
+                'id' => 'phone',
+                'title' => __('Telefono'),
+                'class' => 'required-entry',
+                'required' => true,
+            ]
+        );
+
+        $fieldset->addField(
+            'latitude',
+            'text',
+            [
+                'name' => 'latitude',
+                'label' => __('Latitud'),
+                'id' => 'latitude',
+                'title' => __('Latitud'),
+                'class' => 'required-entry',
+                'required' => true,
+            ]
+        );
+
+        $fieldset->addField(
+            'longitude',
+            'text',
+            [
+                'name' => 'longitude',
+                'label' => __('Longitud'),
+                'id' => 'longitude',
+                'title' => __('Longitud'),
                 'class' => 'required-entry',
                 'required' => true,
             ]

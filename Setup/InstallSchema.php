@@ -26,23 +26,35 @@ class InstallSchema implements InstallSchemaInterface
             ['identity' => true, 'nullable' => false, 'primary' => true],
             'Record ID'
         )->addColumn(
-            'name',
+            'branchName',
             \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
             255,
             ['nullable' => false],
-            'Name'
+            'Sucursal'
         )->addColumn(
-            'description',
+            'address',
             \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
             '2M',
             ['nullable' => false],
-            'Description'
+            'Direccion'
         )->addColumn(
-            'link',
+            'phone',
             \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
             500,
             ['nullable' => false],
-            'External Link'
+            'Telefono'
+        )->addColumn(
+            'latitude',
+            \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
+            255,
+            ['nullable' => false],
+            'Latitud'
+        )->addColumn(
+            'longitude',
+            \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
+            255,
+            ['nullable' => false],
+            'Longitud'
         )->addColumn(
             'is_active',
             \Magento\Framework\DB\Ddl\Table::TYPE_SMALLINT,

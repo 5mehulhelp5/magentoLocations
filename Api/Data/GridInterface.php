@@ -5,9 +5,11 @@ namespace LeanCommerce\LocationGrid\Api\Data;
 interface GridInterface
 {
     const ENTITY_ID = 'entity_id';
-    const NAME = 'name';
-    const DESCRIPTION = 'description';
-    const LINK = 'link';
+    const BRANCHNAME = 'branchName';
+    const ADDRESS = 'address';
+    const PHONE = 'phone';
+    const LATITUDE = 'latitude';
+    const LONGITUDE = 'longitude';
     const IS_ACTIVE = 'is_active';
     const CREATED_AT = 'created_at';
     const UPDATED_AT = 'updated_at';
@@ -26,40 +28,64 @@ interface GridInterface
     public function setEntityId($entityId);
 
     /**
-     * Get Name.
+     * Get BranchName.
      *
      * @return varchar
      */
-    public function getName();
+    public function getBranchName();
 
     /**
-     * Set Name.
+     * Set BranchName.
      */
-    public function setName($name);
+    public function setBranchName($branchName);
 
     /**
-     * Get Description.
+     * Get Address.
      *
      * @return varchar
      */
-    public function getDescription();
+    public function getAddress();
 
     /**
-     * Set Description.
+     * Set Address.
      */
-    public function setDescription($description);
+    public function setAddress($address);
 
     /**
-     * Get Link.
+     * Get Phone.
      *
      * @return varchar
      */
-    public function getLink();
+    public function getPhone();
 
     /**
-     * Set Link.
+     * Set Phone.
      */
-    public function setLink($link);
+    public function setPhone($phone);
+
+    /**
+     * Get Latitude.
+     *
+     * @return varchar
+     */
+    public function getLatitude();
+
+    /**
+     * Set Latitude.
+     */
+    public function setLatitude($latitude);
+
+    /** 
+     * Get Longitude.
+     *
+     * @return varchar
+     */
+    public function getLongitude();
+
+    /**
+     * Set Longitude.
+     */
+    public function setLongitude($longitude);
 
     /**
      * Get IsActive.
