@@ -5,7 +5,6 @@ namespace LeanCommerce\LocationGrid\Setup;
 use Magento\Framework\Setup\InstallSchemaInterface;
 use Magento\Framework\Setup\ModuleContextInterface;
 use Magento\Framework\Setup\SchemaSetupInterface;
-use Magento\Framework\App\Filesystem\DirectoryList;
 
 class InstallSchema implements InstallSchemaInterface
 {
@@ -36,13 +35,13 @@ class InstallSchema implements InstallSchemaInterface
             \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
             '2M',
             ['nullable' => false],
-            'Direccion'
+            'Dirección'
         )->addColumn(
             'phone',
             \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
             500,
             ['nullable' => false],
-            'Telefono'
+            'Teléfono'
         )->addColumn(
             'latitude',
             \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
@@ -79,9 +78,7 @@ class InstallSchema implements InstallSchemaInterface
                 'default' => \Magento\Framework\DB\Ddl\Table::TIMESTAMP_INIT_UPDATE,
             ],
             'Last Update Time'
-        )->setComment(
-            'Custom Grid Table'
-        );
+        )->setComment('Custom Grid Table');
 
         $installer->getConnection()->createTable($table);
         $installer->endSetup();

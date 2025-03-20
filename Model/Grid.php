@@ -54,7 +54,7 @@ class Grid extends \Magento\Framework\Model\AbstractModel implements GridInterfa
      */
     public function getBranchName()
     {
-        return $this->getData(self::NAME);
+        return $this->getData(self::BRANCHNAME);
     }
 
     /**
