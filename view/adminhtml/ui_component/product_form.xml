@@ -8,19 +8,24 @@
                 <item name="sortOrder" xsi:type="number">50</item>
             </item>
         </argument>
-        <field name="branch">
+        <!-- app/code/LeanCommerce/LocationGrid/view/adminhtml/ui_component/product_form.xml -->
+        <field name="branches">
             <argument name="data" xsi:type="array">
                 <item name="options" xsi:type="object">LeanCommerce\LocationGrid\Model\Source\Locations</item>
                 <item name="config" xsi:type="array">
-                    <item name="label" xsi:type="string" translate="true">Selecciona el sucursal</item>
+                    <item name="label" xsi:type="string" translate="true">Sucursales</item>
                     <item name="componentType" xsi:type="string">field</item>
-                    <item name="formElement" xsi:type="string">select</item>
+                    <item name="formElement" xsi:type="string">multiselect</item>
                     <item name="source" xsi:type="string">product</item>
-                    <item name="dataScope" xsi:type="string">branch</item>
-                    <item name="sortOrder" xsi:type="number">10</item>
+                    <item name="dataScope" xsi:type="string">branches</item>                    <!-- Cambiado a solo "branches" -->
+                    <item name="component" xsi:type="string">Magento_Ui/js/form/element/multiselect</item>
+                    <item name="elementTmpl" xsi:type="string">ui/form/element/multiselect</item>
                     <item name="validation" xsi:type="array">
                         <item name="required-entry" xsi:type="boolean">false</item>
                     </item>
+                    <!-- Añadir servicio para cargar valores guardados -->
+                    <item name="sortOrder" xsi:type="number">100</item>
+                    <item name="visible" xsi:type="boolean">true</item>
                 </item>
             </argument>
         </field>

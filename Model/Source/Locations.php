@@ -4,8 +4,9 @@ namespace LeanCommerce\LocationGrid\Model\Source;
 
 use Magento\Framework\Data\OptionSourceInterface;
 use LeanCommerce\LocationGrid\Model\ResourceModel\Grid\CollectionFactory;
+use Magento\Eav\Model\Entity\Attribute\Source\AbstractSource;
 
-class Locations implements OptionSourceInterface
+class Locations extends AbstractSource implements OptionSourceInterface
 {
     protected CollectionFactory $collectionFactory;
 
@@ -14,7 +15,7 @@ class Locations implements OptionSourceInterface
         $this->collectionFactory = $collectionFactory;
     }
 
-    public function toOptionArray(): array
+    public function getAllOptions()
     {
         $collection = $this->collectionFactory->create();
 

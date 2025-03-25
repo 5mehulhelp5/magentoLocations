@@ -26,12 +26,13 @@ class InstallData implements InstallDataInterface
         // Agregar atributo 'location_records' al producto
         $eavSetup->addAttribute(
             \Magento\Catalog\Model\Product::ENTITY,
-            'location_records',
+            'branches', // <- Cambia 'location_records' a 'branches' para coincidir con tu formulario
             [
-                'type' => 'varchar', // Se guarda como cadena, p.ej. con IDs separados por comas
-                'label' => 'Associated Locations',
+                'type' => 'text', // Tipo correcto para multiselect
+                'label' => 'Sucursales',
                 'input' => 'multiselect',
-                'backend' => '',
+                'backend' => \Magento\Eav\Model\Entity\Attribute\Backend\ArrayBackend::class,
+                'source' => \LeanCommerce\LocationGrid\Model\Source\Locations::class, // Source model
                 'required' => false,
                 'sort_order' => 200,
                 'global' => \Magento\Eav\Model\Entity\Attribute\ScopedAttributeInterface::SCOPE_GLOBAL,
@@ -41,7 +42,6 @@ class InstallData implements InstallDataInterface
                 'group' => 'General',
                 'used_in_product_listing' => true,
                 'is_visible_on_front' => false,
-                'option' => ['values' => []]
             ]
         );
 
