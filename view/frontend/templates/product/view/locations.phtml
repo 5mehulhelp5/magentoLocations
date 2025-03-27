@@ -1,0 +1,142 @@
+<?php
+/** @var \LeanCommerce\LocationGrid\Block\Product\Locations $block */
+$product = $block->getProduct();
+$locations = $block->getLocations();
+?>
+<?php if ($product && $product->getId() && $locations->count()): ?>
+<div class="product-locations">
+    <button type="button" id="view-locations" class="action primary"><?= $block->escapeHtml(__('View Locations')) ?></button>
+    
+    <div id="locations-modal" style="display:none;">
+        <div class="locations-accordion">
+            <?php foreach ($locations as $location): ?>
+                <?php 
+                    $mapsUrl = 'https://www.google.com/maps?q=' . 
+                              $block->escapeUrl($location->getLatitude()) . ',' . 
+                              $block->escapeUrl($location->getLongitude());
+                ?>
+                <div class="accordion-item">
+                    <h3 class="accordion-header">
+                        <?= $block->escapeHtml($location->getBranchName()) ?>
+                        <span class="toggle-icon"></span>
+                    </h3>
+                    <div class="accordion-content">
+                        <div class="location-details">
+                            <p class="location-address">
+                                <?= $block->escapeHtml($location->getAddress()) ?>
+                            </p>
+                            <?php if ($location->getPhone()): ?>
+                            <p class="location-phone">
+                                <strong><?= __('Tel:') ?></strong> 
+                                <?= $block->escapeHtml($location->getPhone()) ?>
+                            </p>
+                            <?php endif; ?>
+                            <div class="location-maps">
+                                <a href="<?= $mapsUrl ?>" target="_blank" rel="noopener">
+                                    <?= __('View on Google Maps') ?>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <?php endforeach; ?>
+        </div>
+    </div>
+</div>
+
+<script>
+require(['jquery', 'Magento_Ui/js/modal/modal'], function($, modal) { // Asegúrate de incluir 'modal'
+    $(document).ready(function() {
+        // Configuración del modal
+        var options = {
+            type: 'popup',
+            responsive: true,
+            title: '<?= $block->escapeJs(__('Available Locations')) ?>',
+            innerScroll: true,
+            buttons: [{
+                text: '<?= $block->escapeJs(__('Close')) ?>',
+                class: 'action secondary',
+                click: function() {
+                    this.closeModal();
+                }
+            }]
+        };
+        
+        var popup = modal(options, $('#locations-modal'));
+        
+        // Evento click del botón
+        $('#view-locations').click(function() {
+            $('#locations-modal').modal('openModal');
+        });
+
+        // Acordeón
+        $('.accordion-header').click(function() {
+            $(this).toggleClass('active')
+                .next('.accordion-content').slideToggle(300)
+                .parent().siblings().find('.accordion-content').slideUp(300);
+            $(this).parent().siblings().find('.accordion-header').removeClass('active');
+        });
+    });
+});
+</script>
+
+<style>
+.accordion-item {
+    border: 1px solid #ddd;
+    margin-bottom: 5px;
+    border-radius: 4px;
+}
+
+.accordion-header {
+    background: #f5f5f5;
+    padding: 12px 15px;
+    margin: 0;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 16px;
+}
+
+.accordion-header.active {
+    background: #e8e8e8;
+}
+
+.toggle-icon {
+    width: 0;
+    height: 0;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-top: 6px solid #666;
+    transition: transform 0.3s;
+}
+
+.accordion-header.active .toggle-icon {
+    transform: rotate(180deg);
+}
+
+.accordion-content {
+    display: none;
+    padding: 15px;
+    background: #fff;
+}
+
+.location-details p {
+    margin: 0 0 10px;
+}
+
+.location-maps a {
+    display: inline-block;
+    padding: 8px 15px;
+    background: #1979c3;
+    color: #fff !important;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background 0.3s;
+}
+
+.location-maps a:hover {
+    background: #006bb4;
+}
+</style>
+<?php endif; ?>

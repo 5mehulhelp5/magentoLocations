@@ -90,7 +90,7 @@ class Grid extends \Magento\Framework\Model\AbstractModel implements GridInterfa
      */
     public function getPhone()
     {
-        return $this->getData(self::Phone);
+        return $this->getData(self::PHONE);
     }
 
     /**
