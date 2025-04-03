@@ -1,7 +1,15 @@
 <?xml version="1.0"?>
 <routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Webapi:etc/webapi.xsd">
-    <route url="/V1/location-api/products" method="GET">
+    <route url="/V1/location-api/location" method="GET">
         <service class="LeanCommerce\LocationGrid\Api\GridRepositoryInterface" method="getData"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+
+    <!-- POST Insertar Producto -->
+    <route url="/V1/location-api/location/create" method="POST">
+        <service class="LeanCommerce\LocationGrid\Api\GridRepositoryInterface" method="createLocation"/>
         <resources>
             <resource ref="anonymous"/>
         </resources>

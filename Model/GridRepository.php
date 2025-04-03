@@ -2,20 +2,26 @@
 namespace LeanCommerce\LocationGrid\Model;
 
 use LeanCommerce\LocationGrid\Api\GridRepositoryInterface;
+use LeanCommerce\LocationGrid\Model\GridFactory;
 use LeanCommerce\LocationGrid\Model\ResourceModel\Grid\CollectionFactory;
+use Magento\Framework\Exception\LocalizedException;
 
 class GridRepository implements GridRepositoryInterface
 {
-    protected $productCollectionFactory;
+    protected $gridCollectionFactory;
+    protected $gridFactory;
+    protected $productRepository;
 
-    public function __construct(CollectionFactory $productCollectionFactory
+
+    public function __construct(CollectionFactory $gridCollectionFactory, GridFactory $gridFactory
     ) {
-        $this->productCollectionFactory = $productCollectionFactory;
+        $this->gridCollectionFactory = $gridCollectionFactory;
+        $this->gridFactory           = $gridFactory;
     }
 
     public function getData()
     {
-        $collection = $this->productCollectionFactory->create();
+        $collection = $this->gridCollectionFactory->create();
         $collection->addFieldToSelect([
             'entity_id',
             'branchName',
@@ -28,24 +34,19 @@ class GridRepository implements GridRepositoryInterface
         $collection->setPageSize(5); // Limitar a 5 productos para ejemplo
 
         $locations = [];
-        foreach ($collection as $product) {
+        foreach ($collection as $grid) {
             $locations[] = [
-                'id'         => $product->getId(),
-                'branchName' => $product->getBranchName(),
-                'address'    => $product->getAddress(),
-                'phone'      => $product->getPhone(),
-                'latitude'   => $product->getLatitude(),
-                'longitude'  => $product->getLongitude(),
-                'is_active'  => $this->getStatusLabel($product->getStatus()),
+                'id'         => $grid->getId(),
+                'branchName' => $grid->getBranchName(),
+                'address'    => $grid->getAddress(),
+                'phone'      => $grid->getPhone(),
+                'latitude'   => $grid->getLatitude(),
+                'longitude'  => $grid->getLongitude(),
+                'is_active'  => $this->getStatusLabel($grid->getStatus()),
             ];
         }
 
         return ['success' => true, 'locations' => $locations];
-    }
-
-    private function formatPrice($price)
-    {
-        return $this->priceCurrency->format($price, false);
     }
 
     private function getStatusLabel($statusId)
@@ -57,14 +58,38 @@ class GridRepository implements GridRepositoryInterface
         return $statuses[$statusId] ?? 'Desconocido';
     }
 
-    private function getVisibilityLabel($visibilityId)
+    public function createLocation($branchName, $address, $phone, $latitude, $longitude, $is_active)
     {
-        $visibilityOptions = [
-            1 => 'No visible',
-            2 => 'Búsqueda',
-            3 => 'Catálogo',
-            4 => 'Búsqueda y Catálogo',
-        ];
-        return $visibilityOptions[$visibilityId] ?? 'Desconocido';
+        try {
+            // Validaciones básicas
+            if (empty($branchName) || empty($address) || empty($phone) || empty($latitude) || empty($longitude) || empty($is_active)) {
+                throw new LocalizedException(__('Datos inválidos'));
+            }
+
+            // Crear producto
+            $grid = $this->GridFactory->create();
+
+            $grid->setBranchName($branchName)
+                ->setAddress($address)
+                ->setPhone($phone)
+                ->setLatitude($latitude)
+                ->setLongitude($longitude)
+                ->setIsActive($is_active);
+
+            // Guardar producto
+            $this->gridRepository->save($grid);
+
+            return [
+                'success'    => true,
+                'message'    => 'Producto creado',
+                'product_id' => $grid->getId(),
+            ];
+
+        } catch (\Exception $e) {
+            return [
+                'success' => false,
+                'message' => $e->getMessage(),
+            ];
+        }
     }
 }
