@@ -1,22 +1,31 @@
 <?php
+
 namespace LeanCommerce\LocationGrid\Model;
 
 use LeanCommerce\LocationGrid\Api\GridRepositoryInterface;
 use LeanCommerce\LocationGrid\Model\GridFactory;
 use LeanCommerce\LocationGrid\Model\ResourceModel\Grid\CollectionFactory;
 use Magento\Framework\Exception\LocalizedException;
+use LeanCommerce\LocationGrid\Model\ResourceModel\Grid as GridResource;
+
 
 class GridRepository implements GridRepositoryInterface
 {
     protected $gridCollectionFactory;
     protected $gridFactory;
     protected $productRepository;
+    protected $gridResource;
 
 
-    public function __construct(CollectionFactory $gridCollectionFactory, GridFactory $gridFactory
+    public function __construct(
+        CollectionFactory $gridCollectionFactory,
+        GridFactory $gridFactory,
+        GridResource $gridResource
+
     ) {
         $this->gridCollectionFactory = $gridCollectionFactory;
         $this->gridFactory           = $gridFactory;
+        $this->gridResource          = $gridResource;
     }
 
     public function getData()
@@ -67,7 +76,7 @@ class GridRepository implements GridRepositoryInterface
             }
 
             // Crear producto
-            $grid = $this->GridFactory->create();
+            $grid = $this->gridFactory->create();
 
             $grid->setBranchName($branchName)
                 ->setAddress($address)
@@ -77,14 +86,13 @@ class GridRepository implements GridRepositoryInterface
                 ->setIsActive($is_active);
 
             // Guardar producto
-            $this->gridRepository->save($grid);
+            $this->gridResource->save($grid);
 
             return [
                 'success'    => true,
                 'message'    => 'Producto creado',
                 'product_id' => $grid->getId(),
             ];
-
         } catch (\Exception $e) {
             return [
                 'success' => false,
