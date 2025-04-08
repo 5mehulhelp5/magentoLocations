@@ -1,5 +1,4 @@
 <?php
-
 namespace LeanCommerce\LocationGrid\Model\ResourceModel\LocationProduct;
 
 use Magento\Framework\Model\ResourceModel\Db\Collection\AbstractCollection;

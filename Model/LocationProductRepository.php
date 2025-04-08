@@ -1,65 +1,71 @@
 <?php
-
 namespace LeanCommerce\LocationGrid\Model;
 
-use LeanCommerce\LocationGrid\Api\LocationProductRepositoryInterface;
 use LeanCommerce\LocationGrid\Api\Data\LocationProductInterface;
-use LeanCommerce\LocationGrid\Model\ResourceModel\LocationProduct as ResourceModel;
+use LeanCommerce\LocationGrid\Api\LocationProductRepositoryInterface;
 use LeanCommerce\LocationGrid\Model\ResourceModel\LocationProduct\CollectionFactory;
-use Magento\Framework\Api\SearchCriteriaInterface;
-use Magento\Framework\Api\SearchResultsInterfaceFactory;
+use Magento\Framework\Exception\AlreadyExistsException;
+use Magento\Framework\Exception\NoSuchEntityException;
 
 class LocationProductRepository implements LocationProductRepositoryInterface
 {
-    protected $resource;
     protected $locationProductFactory;
     protected $collectionFactory;
-    protected $searchResultsFactory;
+    protected $resource;
 
     public function __construct(
-        ResourceModel $resource,
-        LocationProductFactory $locationProductFactory,
-        CollectionFactory $collectionFactory,
-        SearchResultsInterfaceFactory $searchResultsFactory
+        \LeanCommerce\LocationGrid\Model\LocationProductFactory $locationProductFactory,
+        \LeanCommerce\LocationGrid\Model\ResourceModel\LocationProduct $resource,
+        CollectionFactory $collectionFactory
     ) {
-        $this->resource = $resource;
         $this->locationProductFactory = $locationProductFactory;
+        $this->resource = $resource;
         $this->collectionFactory = $collectionFactory;
-        $this->searchResultsFactory = $searchResultsFactory;
     }
 
-    public function save(LocationProductInterface $locationProduct)
+    public function delete($productId, $locationId)
     {
-        $this->resource->save($locationProduct);
-        return $locationProduct;
-    }
+        $collection = $this->collectionFactory->create()
+            ->addFieldToFilter('product_id', $productId)
+            ->addFieldToFilter('location_id', $locationId);
+        
+        if ($collection->getSize() === 0) {
+            throw new NoSuchEntityException(__('Record not found'));
+        }
 
-    public function getById($productId)
-    {
-        $locationProduct = $this->locationProductFactory->create();
-        $this->resource->load($locationProduct, $productId);
-        return $locationProduct;
-    }
-
-    public function delete(LocationProductInterface $locationProduct)
-    {
-        $this->resource->delete($locationProduct);
+        foreach ($collection as $item) {
+            $this->resource->delete($item);
+        }
         return true;
     }
 
-    public function getList(SearchCriteriaInterface $criteria)
+    public function getList()
     {
-        $collection = $this->collectionFactory->create();
-        foreach ($criteria->getFilterGroups() as $group) {
-            foreach ($group->getFilters() as $filter) {
-                $collection->addFieldToFilter($filter->getField(), [$filter->getConditionType() => $filter->getValue()]);
-            }
+        return $this->collectionFactory->create()->getItems();
+    }
+
+    public function getByProductId($productId)
+    {
+        return $this->collectionFactory->create()
+            ->addFieldToFilter('product_id', $productId)
+            ->getItems();
+    }
+
+    public function save($productId, $locationId)
+    {
+        // Validar duplicados
+        $collection = $this->collectionFactory->create()
+            ->addFieldToFilter('product_id', $productId)
+            ->addFieldToFilter('location_id', $locationId);
+        
+        if ($collection->getSize() > 0) {
+            throw new AlreadyExistsException(__('This product-location combination already exists.'));
         }
 
-        $searchResults = $this->searchResultsFactory->create();
-        $searchResults->setItems($collection->getItems());
-        $searchResults->setTotalCount($collection->getSize());
-
-        return $searchResults;
+        $locationProduct = $this->locationProductFactory->create();
+        $locationProduct->setProductId($productId)
+            ->setLocationId($locationId);
+        $this->resource->save($locationProduct);
+        return $locationProduct;
     }
 }

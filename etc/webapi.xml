@@ -19,33 +19,32 @@
 
     <!-- 🔁 Product-Location API -->
 
-    <!-- Obtener por product_id -->
-    <route url="/V1/location-api/product-location/:id" method="GET">
-        <service class="LeanCommerce\LocationGrid\Api\LocationProductRepositoryInterface" method="getById"/>
+    <route url="/V1/location-product/delete/:productId/:locationId" method="DELETE">
+        <service class="LeanCommerce\LocationGrid\Api\LocationProductRepositoryInterface" method="delete"/>
         <resources>
             <resource ref="anonymous"/>
         </resources>
     </route>
 
-    <!-- Crear relación product-location -->
-    <route url="/V1/location-api/product-location" method="POST">
-        <service class="LeanCommerce\LocationGrid\Api\LocationProductRepositoryInterface" method="save"/>
-        <resources>
-            <resource ref="anonymous"/>
-        </resources>
-    </route>
-
-    <!-- Obtener lista -->
-    <route url="/V1/location-api/product-location" method="GET">
+    <!-- Get All -->
+    <route url="/V1/location-product/list" method="GET">
         <service class="LeanCommerce\LocationGrid\Api\LocationProductRepositoryInterface" method="getList"/>
         <resources>
             <resource ref="anonymous"/>
         </resources>
     </route>
 
-    <!-- Eliminar relación -->
-    <route url="/V1/location-api/product-location" method="DELETE">
-        <service class="LeanCommerce\LocationGrid\Api\LocationProductRepositoryInterface" method="delete"/>
+    <!-- Get by Product ID -->
+    <route url="/V1/location-product/product/:productId" method="GET">
+        <service class="LeanCommerce\LocationGrid\Api\LocationProductRepositoryInterface" method="getByProductId"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+
+    <!-- Save -->
+    <route url="/V1/location-product/save" method="POST">
+        <service class="LeanCommerce\LocationGrid\Api\LocationProductRepositoryInterface" method="save"/>
         <resources>
             <resource ref="anonymous"/>
         </resources>

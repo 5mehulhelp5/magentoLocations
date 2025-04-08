@@ -1,11 +1,10 @@
 <?php
-
 namespace LeanCommerce\LocationGrid\Setup;
 
-use Magento\Framework\Setup\UpgradeSchemaInterface;
-use Magento\Framework\Setup\SchemaSetupInterface;
-use Magento\Framework\Setup\ModuleContextInterface;
 use Magento\Framework\DB\Ddl\Table;
+use Magento\Framework\Setup\ModuleContextInterface;
+use Magento\Framework\Setup\SchemaSetupInterface;
+use Magento\Framework\Setup\UpgradeSchemaInterface;
 
 class UpgradeSchema implements UpgradeSchemaInterface
 {
@@ -19,8 +18,14 @@ class UpgradeSchema implements UpgradeSchemaInterface
         if (version_compare($context->getVersion(), '1.0.1', '<')) {
             // Crear tabla relacional 'lc_location_product'
             $relationTableName = 'lc_location_product';
-            $relationTable = $installer->getConnection()->newTable(
+            $relationTable     = $installer->getConnection()->newTable(
                 $installer->getTable($relationTableName)
+            )->addColumn(
+                'entity_id',
+                Table::TYPE_INTEGER,
+                null,
+                ['identity' => true, 'unsigned' => true, 'nullable' => false, 'primary' => true],
+                'Entity ID'
             )
                 ->addColumn(
                     'product_id',

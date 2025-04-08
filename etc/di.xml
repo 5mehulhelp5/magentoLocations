@@ -3,7 +3,8 @@
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
     <preference for="LeanCommerce\LocationGrid\Api\Data\GridInterface" type="LeanCommerce\LocationGrid\Model\Grid" />
     <preference for="LeanCommerce\LocationGrid\Api\GridRepositoryInterface" type="LeanCommerce\LocationGrid\Model\GridRepository"/>
-
+    <preference for="LeanCommerce\LocationGrid\Api\Data\LocationProductInterface" type="LeanCommerce\LocationGrid\Model\LocationProduct"/>
+    <preference for="LeanCommerce\LocationGrid\Api\LocationProductRepositoryInterface" type="LeanCommerce\LocationGrid\Model\LocationProductRepository"/>
 
     <virtualType name="LeanCommerce\LocationGrid\Model\ResourceModel\Grid\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
         <arguments>

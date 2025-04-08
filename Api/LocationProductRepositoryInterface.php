@@ -1,42 +1,42 @@
 <?php
-
 namespace LeanCommerce\LocationGrid\Api;
 
 use LeanCommerce\LocationGrid\Api\Data\LocationProductInterface;
-use Magento\Framework\Api\SearchCriteriaInterface;
-use Magento\Framework\Api\SearchResultsInterface;
 
 interface LocationProductRepositoryInterface
 {
     /**
-     * Save a product-location relation.
-     *
-     * @param LocationProductInterface $locationProduct
-     * @return LocationProductInterface
-     */
-    public function save(LocationProductInterface $locationProduct);
-
-    /**
-     * Get product-location relation by Product ID.
+     * Delete a product-location relation
      *
      * @param int $productId
-     * @return LocationProductInterface
-     */
-    public function getById($productId);
-
-    /**
-     * Delete a product-location relation.
-     *
-     * @param LocationProductInterface $locationProduct
+     * @param int $locationId
      * @return bool
+     * @throws \Magento\Framework\Exception\NoSuchEntityException
      */
-    public function delete(LocationProductInterface $locationProduct);
+    public function delete($productId, $locationId);
 
     /**
-     * Get a list of product-location relations matching criteria.
+     * Get list of all product-location relations
      *
-     * @param SearchCriteriaInterface $searchCriteria
-     * @return SearchResultsInterface
+     * @return \LeanCommerce\LocationGrid\Api\Data\LocationProductInterface[]
      */
-    public function getList(SearchCriteriaInterface $searchCriteria);
+    public function getList();
+
+    /**
+     * Get product-location relations by product ID
+     *
+     * @param int $productId
+     * @return \LeanCommerce\LocationGrid\Api\Data\LocationProductInterface[]
+     */
+    public function getByProductId($productId);
+
+    /**
+     * Save product-location relation
+     *
+     * @param int $productId
+     * @param int $locationId
+     * @return \LeanCommerce\LocationGrid\Api\Data\LocationProductInterface
+     * @throws \Magento\Framework\Exception\AlreadyExistsException
+     */
+    public function save($productId, $locationId);
 }

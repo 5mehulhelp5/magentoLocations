@@ -1,10 +1,8 @@
 <?php
-
 namespace LeanCommerce\LocationGrid\Model;
 
-use Magento\Framework\Model\AbstractModel;
 use LeanCommerce\LocationGrid\Api\Data\LocationProductInterface;
-
+use Magento\Framework\Model\AbstractModel;
 
 class LocationProduct extends AbstractModel implements LocationProductInterface
 {
@@ -13,23 +11,51 @@ class LocationProduct extends AbstractModel implements LocationProductInterface
         $this->_init(\LeanCommerce\LocationGrid\Model\ResourceModel\LocationProduct::class);
     }
 
+    /**
+     * @inheritDoc
+     */
+    public function getEntityId()
+    {
+        return $this->getData(self::ENTITY_ID);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function setEntityId($entityId)
+    {
+        return $this->setData(self::ENTITY_ID, $entityId);
+    }
+
+    /**
+     * @inheritDoc
+     */
     public function getProductId()
     {
         return $this->getData(self::PRODUCT_ID);
     }
 
-    public function setProductId($id)
+    /**
+     * @inheritDoc
+     */
+    public function setProductId($productId)
     {
-        return $this->setData(self::PRODUCT_ID, $id);
+        return $this->setData(self::PRODUCT_ID, $productId);
     }
 
+    /**
+     * @inheritDoc
+     */
     public function getLocationId()
     {
         return $this->getData(self::LOCATION_ID);
     }
 
-    public function setLocationId($id)
+    /**
+     * @inheritDoc
+     */
+    public function setLocationId($locationId)
     {
-        return $this->setData(self::LOCATION_ID, $id);
+        return $this->setData(self::LOCATION_ID, $locationId);
     }
 }
