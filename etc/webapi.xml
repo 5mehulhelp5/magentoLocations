@@ -1,5 +1,7 @@
 <?xml version="1.0"?>
 <routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Webapi:etc/webapi.xsd">
+
+    <!-- 📦 Location Records API -->
     <route url="/V1/location-api/location" method="GET">
         <service class="LeanCommerce\LocationGrid\Api\GridRepositoryInterface" method="getData"/>
         <resources>
@@ -7,11 +9,46 @@
         </resources>
     </route>
 
-    <!-- POST Insertar Producto -->
+    <!-- 🔨 Crear nueva ubicación -->
     <route url="/V1/location-api/location/create" method="POST">
         <service class="LeanCommerce\LocationGrid\Api\GridRepositoryInterface" method="createLocation"/>
         <resources>
             <resource ref="anonymous"/>
         </resources>
     </route>
+
+    <!-- 🔁 Product-Location API -->
+
+    <!-- Obtener por product_id -->
+    <route url="/V1/location-api/product-location/:id" method="GET">
+        <service class="LeanCommerce\LocationGrid\Api\LocationProductRepositoryInterface" method="getById"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+
+    <!-- Crear relación product-location -->
+    <route url="/V1/location-api/product-location" method="POST">
+        <service class="LeanCommerce\LocationGrid\Api\LocationProductRepositoryInterface" method="save"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+
+    <!-- Obtener lista -->
+    <route url="/V1/location-api/product-location" method="GET">
+        <service class="LeanCommerce\LocationGrid\Api\LocationProductRepositoryInterface" method="getList"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+
+    <!-- Eliminar relación -->
+    <route url="/V1/location-api/product-location" method="DELETE">
+        <service class="LeanCommerce\LocationGrid\Api\LocationProductRepositoryInterface" method="delete"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+
 </routes>
