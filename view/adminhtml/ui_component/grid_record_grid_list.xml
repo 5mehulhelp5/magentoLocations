@@ -112,7 +112,7 @@
                 <item name="config" xsi:type="array">
                     <item name="indexField" xsi:type="string">entity_id</item>
                     <item name="sorting" xsi:type="string">desc</item>
-                    <item name="sortOrder" xsi:type="number">0</item>
+                    <item name="sortOrder" xsi:type="number">10</item>
                 </item>
             </argument>
         </selectionsColumn>
@@ -121,6 +121,8 @@
                 <item name="config" xsi:type="array">
                     <item name="filter" xsi:type="string">text</item>
                     <item name="label" xsi:type="string" translate="true">Sucursal</item>
+                    <item name="sortOrder" xsi:type="number">20</item>
+                    <item name="visible" xsi:type="boolean">true</item>
                 </item>
             </argument>
         </column>
@@ -129,6 +131,8 @@
                 <item name="config" xsi:type="array">
                     <item name="filter" xsi:type="string">false</item>
                     <item name="label" xsi:type="string" translate="true">Dirección</item>
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="sortOrder" xsi:type="number">30</item>
                 </item>
             </argument>
         </column>
@@ -137,6 +141,8 @@
                 <item name="config" xsi:type="array">
                     <item name="filter" xsi:type="string">false</item>
                     <item name="label" xsi:type="string" translate="true">Telefono</item>
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="sortOrder" xsi:type="number">40</item>
                 </item>
             </argument>
         </column>
@@ -145,6 +151,8 @@
                 <item name="config" xsi:type="array">
                     <item name="filter" xsi:type="string">false</item>
                     <item name="label" xsi:type="string" translate="true">Latitud</item>
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="sortOrder" xsi:type="number">50</item>
                 </item>
             </argument>
         </column>
@@ -153,6 +161,8 @@
                 <item name="config" xsi:type="array">
                     <item name="filter" xsi:type="string">false</item>
                     <item name="label" xsi:type="string" translate="true">Longitud</item>
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="sortOrder" xsi:type="number">60</item>
                 </item>
             </argument>
         </column>
@@ -164,6 +174,8 @@
                     <item name="component" xsi:type="string">Magento_Ui/js/grid/columns/select</item>
                     <item name="dataType" xsi:type="string">select</item>
                     <item name="label" xsi:type="string" translate="true">Is Active</item>
+                    <item name="sortOrder" xsi:type="number">70</item>
+                    <item name="visible" xsi:type="boolean">true</item>
                 </item>
             </argument>
         </column>
@@ -174,6 +186,8 @@
                     <item name="component" xsi:type="string">Magento_Ui/js/grid/columns/date</item>
                     <item name="dataType" xsi:type="string">date</item>
                     <item name="label" xsi:type="string" translate="true">Created At</item>
+                    <item name="sortOrder" xsi:type="number">80</item>
+                    <item name="visible" xsi:type="boolean">true</item>
                 </item>
             </argument>
         </column>
@@ -184,6 +198,8 @@
                     <item name="component" xsi:type="string">Magento_Ui/js/grid/columns/date</item>
                     <item name="dataType" xsi:type="string">date</item>
                     <item name="label" xsi:type="string" translate="true">Updated At</item>
+                    <item name="sortOrder" xsi:type="number">90</item>
+                    <item name="visible" xsi:type="boolean">true</item>
                 </item>
             </argument>
         </column>
@@ -194,6 +210,9 @@
                     <item name="resizeEnabled" xsi:type="boolean">false</item>
                     <item name="resizeDefaultWidth" xsi:type="string">107</item>
                     <item name="indexField" xsi:type="string">id</item>
+                    <item name="label" xsi:type="string" translate="true">Acciones</item>
+                    <item name="sortOrder" xsi:type="number">100</item>
+                    <item name="visible" xsi:type="boolean">true</item>
                 </item>
             </argument>
         </actionsColumn>
